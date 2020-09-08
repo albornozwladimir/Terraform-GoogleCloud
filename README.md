@@ -19,6 +19,23 @@ Para finalizar la creación de la imagen ejecutamos
 packer build config_imagen.json
 ```
 
+## Lanzamos infraestructura inicial con Terraform
+Una vez configurado nuestro **_main.tf_** procedemos a ejecutar los siguientes comandos de terraform
+```bash
+terraform init #Inicializa terraform con el provider especificado en el archivo de configuración, Google en este caso
+terraform plan #Muestra los cambios necesarios para su infraestructura (en caso de tenerlos)
+```
+Debemos autentificanos con una variable de entorno **EXPORT_GOOGLE_CREDENTIALS**
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="ruta/cuenta_servicio.json.json"
+```
+Finalizamos, en caso de no tener algún error, aplicando los cambios con
+```bash
+terraform apply # Lanzamos la configuración
+```
+Esperamos unos minutos y la instancia de máquina virtual, las reglas de firewall asociadas y la instancia de SQL configurada en nuestro archivo Terraform estarán creados en nuestro proyecto GoogleCLoud.
+
+
 ## Herramientas utilizadas
  * #### Terraform
 Herramienta que nos va a permite definir y configurar la infraestructura de nuestro DataCenter en un lenguaje de alto nivel. (https://www.terraform.io)
@@ -41,9 +58,9 @@ packer version #Debería mostrar versión instalada
 ```
 
 * #### Google Cloud
-Debemos tener habilitado un proyecto en https://cloud.google.com y tener el fichero cuenta_servicio.json (identificación de la cuenta de servicio) que vamos a referenciar para crear imagen de máquina. (También se puede autentificar con una variable de entorno, más info en https://cloud.google.com/iam/docs)
+Debemos tener habilitado un proyecto en https://cloud.google.com y tener el fichero cuenta_servicio.json (identificación de la cuenta de servicio) que vamos a referenciar para crear imagen de máquina.
 
-
+La Autentificación con variable de entorno para autentificar en API de GoogleCloud , más info en https://cloud.google.com/iam/docs)
 
 
 
